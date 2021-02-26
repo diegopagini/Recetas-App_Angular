@@ -8,6 +8,7 @@ import { RecetasModule } from './pages/recetas/recetas.module';
 import { RecetaModule } from './pages/receta/receta.module';
 import { MaterialModule } from './material/material/material.module';
 import { CustomCommonModule } from './common/custom-common/custom-common.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { CustomCommonModule } from './common/custom-common/custom-common.module'
     BrowserAnimationsModule,
     MaterialModule,
     CustomCommonModule,
+    HttpClientModule,
     RecetasModule,
     RecetaModule,
   ],
