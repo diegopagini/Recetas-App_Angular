@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecetasModule } from './pages/recetas/recetas.module';
 import { RecetaModule } from './pages/receta/receta.module';
 import { MaterialModule } from './material/material/material.module';
-import { CustomCommonModule } from './common/custom-common.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomCommonModule } from './common/custom-common.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,10 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CustomCommonModule,
     HttpClientModule,
     RecetasModule,
     RecetaModule,
+    CustomCommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
