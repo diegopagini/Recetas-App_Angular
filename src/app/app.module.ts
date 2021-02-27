@@ -9,6 +9,7 @@ import { RecetaModule } from './pages/receta/receta.module';
 import { MaterialModule } from './material/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomCommonModule } from './common/custom-common.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,8 @@ import { CustomCommonModule } from './common/custom-common.module';
     RecetasModule,
     RecetaModule,
     CustomCommonModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
