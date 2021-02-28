@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var M: any;
+
 @Component({
   selector: 'app-recetas',
   templateUrl: './recetas.component.html',
@@ -8,14 +10,13 @@ declare var M: any;
 })
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
-  recetas = [1, 2, 3];
+  recetas: any = [1, 2, 3];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.openModal();
     this.createForm();
-    this.formListener();
   }
 
   openModal() {
@@ -30,10 +31,18 @@ export class RecetasComponent implements OnInit {
 
   createForm() {
     this.customForm = this.fb.group({
+      titulo: ['', [Validators.required, Validators.minLength(10)]],
       foto: ['', [Validators.required]],
-      ingredientes: ['', [Validators.required, Validators.minLength(5)]],
+      ingredientes: ['', [Validators.required, Validators.minLength(10)]],
       preparacion: ['', [Validators.required, Validators.minLength(10)]],
     });
+  }
+
+  get tituloInvalid() {
+    return (
+      this.customForm.get('titulo').invalid &&
+      this.customForm.get('titulo').touched
+    );
   }
 
   get fotoInvalid() {
@@ -59,17 +68,11 @@ export class RecetasComponent implements OnInit {
   enviarReceta() {
     console.log(this.customForm.value);
     if (this.customForm.valid) {
-      //Enviar
+      this.recetas.push(this.customForm);
+      this.customForm.reset;
     } else {
       this.customForm.markAllAsTouched();
+      return;
     }
-
-    this.customForm.reset();
-  }
-
-  formListener() {
-    this.customForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
   }
 }

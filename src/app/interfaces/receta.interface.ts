@@ -1,6 +1,6 @@
 export interface Receta {
   id: any;
-  nombre: string;
+  titulo: string;
   ingredientes: string;
   preparacion: string;
   imagen: string;
