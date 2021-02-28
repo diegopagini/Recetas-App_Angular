@@ -20,27 +20,29 @@
       <div class="file-field input-field">
         <div class="btn btn-custom">
           <span>Foto</span>
-          <input type="file" />
+          <input formControlName="foto" type="file" />
         </div>
         <div class="file-path-wrapper">
           <input
             class="file-path validate"
             type="text"
-            formControlName="foto"
             placeholder="Carga una foto de tu receta"
           />
+          <span *ngIf="fotoInvalid"></span>
         </div>
       </div>
       <div class="row">
         <div class="col s12 input-field">
           <input formControlName="ingredientes" type="text" id="ingredientes" />
           <label for="ingredientes">Ingredientes</label>
+          <span *ngIf="ingredientesInvalid">A</span>
         </div>
       </div>
       <div class="row">
         <div class="col s12 input-field">
           <input formControlName="preparacion" type="text" id="preparacion" />
           <label for="preparacion">Preparacion</label>
+          <span *ngIf="preparacionInvalid"> asd </span>
         </div>
       </div>
       <div class="modal-footer">

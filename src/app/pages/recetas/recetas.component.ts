@@ -36,8 +36,35 @@ export class RecetasComponent implements OnInit {
     });
   }
 
+  get fotoInvalid() {
+    return (
+      this.customForm.get('foto').invalid && this.customForm.get('foto').touched
+    );
+  }
+
+  get ingredientesInvalid() {
+    return (
+      this.customForm.get('ingredientes').invalid &&
+      this.customForm.get('ingredientes').touched
+    );
+  }
+
+  get preparacionInvalid() {
+    return (
+      this.customForm.get('preparacion').invalid &&
+      this.customForm.get('preparacion').touched
+    );
+  }
+
   enviarReceta() {
     console.log(this.customForm.value);
+    if (this.customForm.valid) {
+      //Enviar
+    } else {
+      this.customForm.markAllAsTouched();
+    }
+
+    this.customForm.reset();
   }
 
   formListener() {
