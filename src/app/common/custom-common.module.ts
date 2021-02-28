@@ -4,6 +4,7 @@ import { MaterialModule } from '../material/material/material.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { SearchModule } from './search/search.module';
 import { FooterModule } from './footer/footer.module';
+import { ModalModule } from './modal/modal.module';
 
 @NgModule({
   declarations: [],
@@ -13,7 +14,8 @@ import { FooterModule } from './footer/footer.module';
     NavbarModule,
     SearchModule,
     FooterModule,
+    ModalModule,
   ],
-  exports: [NavbarModule, SearchModule, FooterModule],
+  exports: [NavbarModule, SearchModule, FooterModule, ModalModule],
 })
 export class CustomCommonModule {}

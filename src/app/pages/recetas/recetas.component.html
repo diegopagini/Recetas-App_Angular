@@ -2,23 +2,57 @@
 
 <mat-divider></mat-divider>
 
-<div class="row title">
-  <h1 class="center-align">Carga tu propia receta..</h1>
+<div class="row title center-align">
+  <!-- Modal Trigger -->
+
+  <a
+    class="waves-effect waves-light modal-trigger btn-custom btn-large"
+    href="#modal1"
+    >Carga tu propia receta</a
+  >
 </div>
 
-<div class="row">
-  <div class="col">
-    <form>
-      <textarea
-        class="materialize-textarea"
-        id="textarea"
-        maxlength="500"
-        minlength="50"
-        placeholder="Ingredientes"
-        required
-        name="textarea"
-      ></textarea>
-      <label for="textarea"></label>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <!-- Form -->
+    <form [formGroup]="customForm" autocomplete="off">
+      <div class="file-field input-field">
+        <div class="btn btn-custom">
+          <span>Foto</span>
+          <input type="file" />
+        </div>
+        <div class="file-path-wrapper">
+          <input
+            class="file-path validate"
+            type="text"
+            formControlName="foto"
+            placeholder="Carga una foto de tu receta"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 input-field">
+          <input formControlName="ingredientes" type="text" id="ingredientes" />
+          <label for="ingredientes">Ingredientes</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 input-field">
+          <input formControlName="preparacion" type="text" id="preparacion" />
+          <label for="preparacion">Preparacion</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-light btn red">Cancelar</a>
+        <button
+          (click)="enviarReceta()"
+          type="button"
+          class="waves-effect waves-light btn btn-custom"
+        >
+          Enviar
+        </button>
+      </div>
     </form>
   </div>
 </div>

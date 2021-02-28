@@ -4,6 +4,7 @@ import { RecetasComponent } from './recetas.component';
 import { Routes, RouterModule } from '@angular/router';
 import { RecetaModule } from '../receta/receta.module';
 import { MaterialModule } from 'src/app/material/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     RecetaModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [RecetasComponent],
