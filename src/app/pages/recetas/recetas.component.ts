@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { RecetasService } from '../../services/recetas.service';
+
 declare var M: any;
 
 @Component({
@@ -12,9 +13,13 @@ export class RecetasComponent implements OnInit {
   customForm: FormGroup;
   recetas: any = [1, 2, 3];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private recetasService: RecetasService
+  ) {}
 
   ngOnInit(): void {
+    console.log(this.recetasService.obtenerReceta());
     this.openModal();
     this.createForm();
   }
@@ -31,6 +36,7 @@ export class RecetasComponent implements OnInit {
 
   createForm() {
     this.customForm = this.fb.group({
+      id: [''],
       titulo: ['', [Validators.required, Validators.minLength(10)]],
       foto: ['', [Validators.required]],
       ingredientes: ['', [Validators.required, Validators.minLength(10)]],
@@ -65,11 +71,29 @@ export class RecetasComponent implements OnInit {
     );
   }
 
-  enviarReceta() {
-    console.log(this.customForm.value);
+  enviarReceta(form) {
     if (this.customForm.valid) {
       this.recetas.push(this.customForm);
+      const JSON_form = JSON.stringify(this.customForm.value);
+      form = JSON_form;
+      this.recetasService.crearReceta(form).subscribe((resp) => {
+        console.log(resp);
+      });
       this.customForm.reset;
+    } else {
+      this.customForm.markAllAsTouched();
+      return;
+    }
+  }
+
+  crearReceta(form: NgForm) {
+    if (form.valid) {
+      console.log(this.customForm.value);
+      this.recetasService
+        .crearReceta(JSON.stringify(this.customForm.value))
+        .subscribe((resp) => {
+          console.log(resp);
+        });
     } else {
       this.customForm.markAllAsTouched();
       return;

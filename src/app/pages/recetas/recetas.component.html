@@ -16,7 +16,12 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <!-- Form -->
-    <form [formGroup]="customForm" autocomplete="off">
+    <form
+      [formGroup]="customForm"
+      autocomplete="off"
+      (ngSubmit)="crearReceta(form)"
+      #form="ngForm"
+    >
       <div class="row">
         <div class="col s12 input-field">
           <input formControlName="titulo" type="text" id="titulo" />
@@ -61,7 +66,6 @@
       <div class="modal-footer">
         <a class="modal-close waves-effect waves-light btn red">Cancelar</a>
         <button
-          (click)="enviarReceta()"
           [disabled]="customForm.invalid"
           type="submit"
           class="waves-effect waves-light btn btn-custom modal-close"
