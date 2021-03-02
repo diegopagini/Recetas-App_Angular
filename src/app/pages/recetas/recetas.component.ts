@@ -11,7 +11,7 @@ declare var M: any;
 })
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
-  recetas: any = [1, 2, 3];
+  recetas: any = [1, 2, 3, 4, 5, 6];
 
   constructor(
     private fb: FormBuilder,
@@ -19,7 +19,9 @@ export class RecetasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.recetasService.obtenerReceta());
+    this.recetasService.obtenerReceta().subscribe((resp) => {
+      console.log(resp);
+    });
     this.openModal();
     this.createForm();
   }

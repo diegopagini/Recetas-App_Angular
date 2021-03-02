@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RecetasService {
-  private base_url: 'https://recetas-34d3c-default-rtdb.firebaseio.com/recetas.json';
+  base_url: 'https://recetas-online-6e495-default-rtdb.firebaseio.com';
 
   constructor(private http: HttpClient) {}
 
@@ -18,10 +18,6 @@ export class RecetasService {
   }
 
   obtenerReceta() {
-    return this.http.get(`${this.base_url}`);
-  }
-
-  private crearArray(recetaObj: object) {
-    return 'Hola mundo';
+    return this.http.get(`${this.base_url}/recetas.json`);
   }
 }

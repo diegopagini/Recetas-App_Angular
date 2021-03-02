@@ -4,16 +4,6 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: 'AIzaSyA720AcF5lOPVgaVZWESQrwwlGjQMUo2iM',
-    authDomain: 'recetas-34d3c.firebaseapp.com',
-    databaseURL: 'https://recetas-34d3c-default-rtdb.firebaseio.com',
-    projectId: 'recetas-34d3c',
-    storageBucket: 'recetas-34d3c.appspot.com',
-    messagingSenderId: '679867111743',
-    appId: '1:679867111743:web:595a5d7177b9a8e46a5b8a',
-    measurementId: 'G-25DMLWFW3L',
-  },
 };
 
 /*

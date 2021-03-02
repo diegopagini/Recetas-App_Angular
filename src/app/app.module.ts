@@ -7,10 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecetasModule } from './pages/recetas/recetas.module';
 import { RecetaModule } from './pages/receta/receta.module';
 import { MaterialModule } from './material/material/material.module';
-import { HttpClientModule } from '@angular/common/http';
 import { CustomCommonModule } from './common/custom-common.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RecetasService } from './services/recetas.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +25,7 @@ import { RecetasService } from './services/recetas.service';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [RecetasService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

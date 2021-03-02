@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RecetaModule } from '../receta/receta.module';
 import { MaterialModule } from 'src/app/material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     RecetaModule,
     MaterialModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
   ],
   exports: [RecetasComponent],
