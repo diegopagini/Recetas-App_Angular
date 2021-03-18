@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Receta } from 'src/app/interfaces/receta.interface';
 import { RecetasService } from '../../services/recetas.service';
 
 declare var M: any;
@@ -11,17 +14,18 @@ declare var M: any;
 })
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
-  recetas: any = [1, 2, 3, 4, 5, 6];
+  recetas: Receta[] = [];
+  items$: Observable<any[]>;
 
   constructor(
     private fb: FormBuilder,
-    private recetasService: RecetasService
-  ) {}
+    public _recetasService: RecetasService,
+    firestore: AngularFirestore
+  ) {
+    this.items$ = firestore.collection('recetas').valueChanges();
+  }
 
   ngOnInit(): void {
-    this.recetasService.obtenerReceta().subscribe((resp) => {
-      console.log(resp);
-    });
     this.openModal();
     this.createForm();
   }
@@ -71,34 +75,5 @@ export class RecetasComponent implements OnInit {
       this.customForm.get('preparacion').invalid &&
       this.customForm.get('preparacion').touched
     );
-  }
-
-  enviarReceta(form) {
-    if (this.customForm.valid) {
-      this.recetas.push(this.customForm);
-      const JSON_form = JSON.stringify(this.customForm.value);
-      form = JSON_form;
-      this.recetasService.crearReceta(form).subscribe((resp) => {
-        console.log(resp);
-      });
-      this.customForm.reset;
-    } else {
-      this.customForm.markAllAsTouched();
-      return;
-    }
-  }
-
-  crearReceta(form: NgForm) {
-    if (form.valid) {
-      console.log(this.customForm.value);
-      this.recetasService
-        .crearReceta(JSON.stringify(this.customForm.value))
-        .subscribe((resp) => {
-          console.log(resp);
-        });
-    } else {
-      this.customForm.markAllAsTouched();
-      return;
-    }
   }
 }

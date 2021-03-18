@@ -1,4 +1,4 @@
-<app-receta [recetas]="recetas"></app-receta>
+<app-receta [recetas]="items$ | async"></app-receta>
 
 <mat-divider></mat-divider>
 
@@ -16,12 +16,7 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <!-- Form -->
-    <form
-      [formGroup]="customForm"
-      autocomplete="off"
-      (ngSubmit)="crearReceta(form)"
-      #form="ngForm"
-    >
+    <form [formGroup]="customForm" autocomplete="off" #form="ngForm">
       <div class="row">
         <div class="col s12 input-field">
           <input formControlName="titulo" type="text" id="titulo" />

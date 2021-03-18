@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material/material.module';
 import { CustomCommonModule } from './common/custom-common.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RecetasService } from './services/recetas.service';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -34,7 +35,7 @@ import { environment } from 'src/environments/environment';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [RecetasService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

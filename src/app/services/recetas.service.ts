@@ -16,34 +16,43 @@ export class RecetasService {
     private storage: AngularFireStorage
   ) {}
 
-  private guardarReceta(receta: { nombre: string; url: string }) {
+  public guardarReceta(receta: Receta[]) {
     this.db.collection(`/${this.CARPETA_RECETAS}`).add(receta);
   }
 
-  private cargarRecetasFirebase(receta: Receta) {
-    const file = receta.receta;
-    const filePath = `${this.CARPETA_RECETAS}/${receta.titulo}`;
-    const fileRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath, file);
+  // cargarRecetasFirebase(recetas: Receta[]) {
+  //   for (const item of recetas) {
+  //     item.estaSubiendo = true;
+  //     if (item.progreso >= 100) {
+  //       continue;
+  //     }
 
-    uploadTask
-      .percentageChanges()
-      .subscribe((resp) => (receta.progreso = resp));
+  //     const file =
+  //       item.imagen + item.ingredientes + item.preparacion + item.titulo;
+  //     const filePath = `${this.CARPETA_RECETAS}/${item.titulo}`;
+  //     const fileRef = this.storage.ref(filePath);
+  //     const uploadTask = this.storage.upload(filePath, file);
 
-    uploadTask
-      .snapshotChanges()
-      .pipe(
-        finalize(() =>
-          fileRef.getDownloadURL().subscribe((url) => {
-            console.log('Receta guardada con éxito');
-            receta.url = url;
-            this.guardarReceta({
-              nombre: receta.titulo,
-              url: receta.url,
-            });
-          })
-        )
-      )
-      .subscribe();
-  }
+  //     uploadTask
+  //       .percentageChanges()
+  //       .subscribe((resp) => (item.progreso = resp));
+
+  //     uploadTask
+  //       .snapshotChanges()
+  //       .pipe(
+  //         finalize(() =>
+  //           fileRef.getDownloadURL().subscribe((url) => {
+  //             console.log('Receta guardada con éxito');
+  //             item.url = url;
+  //             item.estaSubiendo = false;
+  //             this.guardarReceta({
+  //               nombre: item.titulo,
+  //               url: item.url,
+  //             });
+  //           })
+  //         )
+  //       )
+  //       .subscribe();
+  //   }
+  // }
 }
