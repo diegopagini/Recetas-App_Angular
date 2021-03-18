@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "recetas-online-6e495": {
+      "hosting": {
+        "recetas": [
+          "recetas-online-6e495"
+        ]
+      }
+    }
+  }
+}

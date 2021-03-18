@@ -1,23 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import * as firebase from 'firebase';
 import { Receta } from '../interfaces/receta.interface';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecetasService {
-  base_url: 'https://recetas-online-6e495-default-rtdb.firebaseio.com';
+  private CARPETA_RECETAS = 'recetas';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private db: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
 
-  // POST de una receta
-  crearReceta(receta: Receta | any) {
-    return this.http.post(`${this.base_url}`, receta);
+  private guardarReceta(receta: { nombre: string; url: string }) {
+    this.db.collection(`/${this.CARPETA_RECETAS}`).add(receta);
   }
 
-  obtenerReceta() {
-    return this.http.get(`${this.base_url}/recetas.json`);
+  private cargarRecetasFirebase(receta: Receta) {
+    const file = receta.receta;
+    const filePath = `${this.CARPETA_RECETAS}/${receta.titulo}`;
+    const fileRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, file);
+
+    uploadTask
+      .percentageChanges()
+      .subscribe((resp) => (receta.progreso = resp));
+
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() =>
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log('Receta guardada con éxito');
+            receta.url = url;
+            this.guardarReceta({
+              nombre: receta.titulo,
+              url: receta.url,
+            });
+          })
+        )
+      )
+      .subscribe();
   }
 }
