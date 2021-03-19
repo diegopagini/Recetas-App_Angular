@@ -1,10 +1,7 @@
-export interface Receta {
-  id?: any;
+export class Receta {
+  id?: string;
   titulo?: string;
   ingredientes?: string;
   preparacion?: string;
   imagen?: string;
-  url?: string;
-  estaSubiendo?: boolean;
-  progreso?: number;
 }

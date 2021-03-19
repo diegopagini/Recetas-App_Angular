@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { timestamp } from 'rxjs/operators';
 import { Receta } from 'src/app/interfaces/receta.interface';
 import { RecetasService } from '../../services/recetas.service';
 
@@ -14,8 +15,7 @@ declare var M: any;
 })
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
-  recetas: Receta[] = [];
-  items$: Observable<any[]>;
+  items$;
 
   constructor(
     private fb: FormBuilder,
@@ -75,5 +75,18 @@ export class RecetasComponent implements OnInit {
       this.customForm.get('preparacion').invalid &&
       this.customForm.get('preparacion').touched
     );
+  }
+
+  onResetetForm() {
+    this.customForm.reset();
+  }
+
+  onSaveForm(form: NgForm) {
+    console.log(form);
+    if (this.customForm.valid) {
+      this.customForm.value.id = this.customForm.value.titulo;
+      this._recetasService.saveMessage(this.customForm.value);
+      this.onResetetForm;
+    }
   }
 }

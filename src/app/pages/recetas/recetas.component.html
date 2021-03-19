@@ -4,7 +4,6 @@
 
 <div class="row title center-align">
   <!-- Modal Trigger -->
-
   <a
     class="waves-effect waves-light modal-trigger btn-custom btn-large"
     href="#modal1"
@@ -16,7 +15,12 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <!-- Form -->
-    <form [formGroup]="customForm" autocomplete="off" #form="ngForm">
+    <form
+      [formGroup]="customForm"
+      autocomplete="off"
+      #form="ngForm"
+      (ngSubmit)="onSaveForm(form)"
+    >
       <div class="row">
         <div class="col s12 input-field">
           <input formControlName="titulo" type="text" id="titulo" />
