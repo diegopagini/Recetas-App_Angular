@@ -5,6 +5,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { SearchModule } from './search/search.module';
 import { FooterModule } from './footer/footer.module';
 import { ModalModule } from './modal/modal.module';
+import { RecetaModule } from './receta/receta.module';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,7 @@ import { ModalModule } from './modal/modal.module';
     SearchModule,
     FooterModule,
     ModalModule,
+    RecetaModule,
   ],
   exports: [NavbarModule, SearchModule, FooterModule, ModalModule],
 })

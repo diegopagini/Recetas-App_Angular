@@ -1,15 +1,15 @@
-<ng-container *ngIf="recetas">
+<ng-container *ngIf="recetaToShow">
   <div class="row">
-    <div class="col s12 m4" *ngFor="let receta of recetas">
+    <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          <img [src]="receta.foto" [alt]="receta.titulo" />
-          <span class="card-title">{{ receta.titulo }}</span>
+          <img [src]="recetaToShow.foto" [alt]="recetaToShow.titulo" />
+          <span class="card-title">{{ recetaToShow.titulo }}</span>
         </div>
         <div class="card-content">
-          <p>
-            {{ receta.preparacion }}
-          </p>
+          <h1>
+            {{ recetaToShow.preparacion }}
+          </h1>
         </div>
       </div>
     </div>

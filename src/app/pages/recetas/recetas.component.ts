@@ -46,10 +46,10 @@ export class RecetasComponent implements OnInit {
   createForm() {
     this.customForm = this.fb.group({
       id: [''],
-      titulo: ['', [Validators.required, Validators.minLength(10)]],
+      titulo: ['', [Validators.required, Validators.minLength(5)]],
       foto: ['', [Validators.required]],
-      ingredientes: ['', [Validators.required, Validators.minLength(10)]],
-      preparacion: ['', [Validators.required, Validators.minLength(10)]],
+      ingredientes: ['', [Validators.required, Validators.minLength(5)]],
+      preparacion: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RecetaComponent } from './pages/receta/receta.component';
+import { RecetasComponent } from './pages/recetas/recetas.component';
 
 const routes: Routes = [
   {
-    path: 'recetas',
-    loadChildren: () =>
-      import('./pages/recetas/recetas.module').then((m) => m.RecetasModule),
+    path: '',
+    component: RecetasComponent,
   },
   {
     path: 'receta/:id',
-    loadChildren: () =>
-      import('./pages/receta/receta.module').then((m) => m.RecetaModule),
+    component: RecetaComponent,
   },
 ];
 

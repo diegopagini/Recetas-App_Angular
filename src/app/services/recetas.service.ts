@@ -19,4 +19,9 @@ export class RecetasService {
   guardarReceta(newReceta: any) {
     this.dataCollection.add(newReceta);
   }
+
+  getReceta(id: string) {
+    const docRef = this.db.collection('recetas').doc(id);
+    return docRef.get();
+  }
 }
