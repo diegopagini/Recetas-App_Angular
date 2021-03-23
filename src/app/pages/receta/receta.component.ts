@@ -20,10 +20,9 @@ export class RecetaComponent implements OnInit {
       this.receta = this.recetaService
         .getReceta(params['id'])
         .subscribe((data) => {
-          this.recetaToShow = data;
+          this.recetaToShow = data[0];
           console.log(data);
         });
-      console.log(this.recetaToShow);
     });
   }
 }

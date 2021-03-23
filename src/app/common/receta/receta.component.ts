@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-custom-receta',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RecetaComponent implements OnInit {
   @Input() recetas;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 }

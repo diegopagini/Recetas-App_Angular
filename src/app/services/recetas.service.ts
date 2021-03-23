@@ -4,7 +4,6 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +20,7 @@ export class RecetasService {
   }
 
   getReceta(id: string) {
-    const docRef = this.db.collection('recetas').doc(id);
-    return docRef.get();
+    const docRef = this.db.collection('recetas');
+    return docRef.valueChanges();
   }
 }
