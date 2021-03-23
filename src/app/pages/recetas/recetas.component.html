@@ -33,7 +33,13 @@
       <div class="file-field input-field">
         <div class="btn btn-custom">
           <span>Foto</span>
-          <input formControlName="foto" type="file" />
+          <input
+            formControlName="foto"
+            type="file"
+            id="file"
+            #userPhoto
+            (change)="onFileSelected($event)"
+          />
         </div>
         <div class="file-path-wrapper">
           <input

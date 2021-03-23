@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { timestamp } from 'rxjs/operators';
-import { Receta } from 'src/app/interfaces/receta.interface';
+import { finalize } from 'rxjs/operators';
 import { RecetasService } from '../../services/recetas.service';
 
 declare var M: any;
@@ -16,11 +16,14 @@ declare var M: any;
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
   items$;
+  downloadURL: Observable<string>;
+  fbUrl;
 
   constructor(
     private fb: FormBuilder,
     public _recetasService: RecetasService,
-    firestore: AngularFirestore
+    public firestore: AngularFirestore,
+    public storage: AngularFireStorage
   ) {
     this.items$ = firestore.collection('recetas').valueChanges();
   }
@@ -82,11 +85,32 @@ export class RecetasComponent implements OnInit {
   }
 
   onSaveForm(form: NgForm) {
-    console.log(form);
     if (this.customForm.valid) {
-      this.customForm.value.id = this.customForm.value.titulo;
-      this._recetasService.saveMessage(this.customForm.value);
+      this.customForm.value.id = Math.random().toString(36).substring(2);
+      this.customForm.value.foto = this.fbUrl;
+      this._recetasService.guardarReceta(this.customForm.value);
       this.onResetetForm;
     }
+  }
+
+  onFileSelected(event) {
+    let n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `img/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`img/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe((url) => {
+            if (url) {
+              this.fbUrl = url;
+            }
+          });
+        })
+      )
+      .subscribe();
   }
 }

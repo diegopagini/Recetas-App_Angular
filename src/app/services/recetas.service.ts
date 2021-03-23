@@ -4,9 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import * as firebase from 'firebase';
-import { Receta } from '../interfaces/receta.interface';
-import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +12,11 @@ import { finalize } from 'rxjs/operators';
 export class RecetasService {
   private dataCollection: AngularFirestoreCollection<any>;
 
-  constructor(afs: AngularFirestore) {
-    this.dataCollection = afs.collection<any>('recetas');
+  constructor(public db: AngularFirestore, public storage: AngularFireStorage) {
+    this.dataCollection = this.db.collection<any>('recetas');
   }
 
-  saveMessage(newReceta: any) {
+  guardarReceta(newReceta: any) {
     this.dataCollection.add(newReceta);
   }
 }
