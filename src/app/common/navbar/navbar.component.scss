@@ -1,0 +1,8 @@
+.title {
+  cursor: pointer;
+}
+.title:focus {
+  border: none;
+  text-decoration: none;
+  outline: none;
+}

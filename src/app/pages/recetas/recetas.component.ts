@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { RecetasService } from '../../services/recetas.service';
 
 declare var M: any;
@@ -15,9 +16,9 @@ declare var M: any;
 })
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
-  items$;
+  items$: Observable<any>;
   downloadURL: Observable<string>;
-  fbUrl;
+  fbUrl: string;
 
   constructor(
     private fb: FormBuilder,

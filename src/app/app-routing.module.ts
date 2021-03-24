@@ -5,12 +5,17 @@ import { RecetasComponent } from './pages/recetas/recetas.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'recetas',
     component: RecetasComponent,
   },
   {
     path: 'receta/:id',
     component: RecetaComponent,
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'recetas',
   },
 ];
 

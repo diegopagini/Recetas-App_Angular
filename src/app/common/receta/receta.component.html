@@ -7,9 +7,7 @@
           <span class="card-title">{{ receta.titulo }}</span>
         </div>
         <div class="card-content">
-          <p>
-            {{ receta.preparacion }}
-          </p>
+          <p>{{ receta.preparacion | slice: 0:100 }}...</p>
         </div>
       </div>
     </div>

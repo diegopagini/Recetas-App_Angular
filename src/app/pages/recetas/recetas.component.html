@@ -1,6 +1,12 @@
-<app-custom-receta [recetas]="items$ | async"></app-custom-receta>
+<ng-container *ngIf="items$ | async">
+  <app-custom-receta [recetas]="items$ | async"></app-custom-receta>
+</ng-container>
 
 <mat-divider></mat-divider>
+
+<ng-container *ngIf="!(items$ | async)">
+  <div>Spiner</div>
+</ng-container>
 
 <div class="row title center-align">
   <!-- Modal Trigger -->
@@ -52,8 +58,17 @@
       </div>
       <div class="row">
         <div class="col s12 input-field">
-          <input formControlName="ingredientes" type="text" id="ingredientes" />
-          <label for="ingredientes">Ingredientes</label>
+          <label for="ingredientes text-label">Ingredientes</label>
+          <textarea
+            class="text-area"
+            formControlName="ingredientes"
+            type="text-area"
+            id="ingredientes"
+            cols="10"
+            rows="10"
+            autocapitalize="sentences"
+            wrap="hard"
+          ></textarea>
           <span class="error" *ngIf="ingredientesInvalid"
             >Los ingredientes son obligatorios.</span
           >
@@ -61,8 +76,13 @@
       </div>
       <div class="row">
         <div class="col s12 input-field">
-          <input formControlName="preparacion" type="text" id="preparacion" />
-          <label for="preparacion">Preparacion</label>
+          <label for="preparacion text-label">Preparacion</label>
+          <textarea
+            class="text-area"
+            formControlName="preparacion"
+            type="text-area"
+            id="preparacion"
+          ></textarea>
           <span class="error" *ngIf="preparacionInvalid"
             >La preparación es obligatoria.</span
           >
