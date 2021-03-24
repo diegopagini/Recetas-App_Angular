@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 import { RecetasService } from 'src/app/services/recetas.service';
+import { Receta } from '../../interfaces/receta.interface';
 
 @Component({
   selector: 'app-receta',
@@ -8,21 +10,23 @@ import { RecetasService } from 'src/app/services/recetas.service';
   styleUrls: ['./receta.component.scss'],
 })
 export class RecetaComponent implements OnInit {
-  receta;
-  recetaToShow;
+  public receta: Receta;
+  public id: string;
+  public recetaId: string;
   constructor(
     private route: ActivatedRoute,
     private recetaService: RecetasService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.receta = this.recetaService
-        .getReceta(params['id'])
-        .subscribe((data) => {
-          this.recetaToShow = data[0];
-          console.log(data);
+      this.recetaService.getReceta(params['id']).subscribe((data: any) => {
+        this.id = params['id'];
+        this.receta = data.filter((element: Receta) => {
+          return element.id.includes(this.id);
         });
+        console.log(this.receta);
+      });
     });
   }
 }

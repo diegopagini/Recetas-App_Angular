@@ -1,14 +1,14 @@
-<ng-container *ngIf="recetaToShow">
+<ng-container *ngIf="receta">
   <div class="row">
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          <img [src]="recetaToShow.foto" [alt]="recetaToShow.titulo" />
-          <span class="card-title">{{ recetaToShow.titulo }}</span>
+          <img [src]="receta.foto" [alt]="receta.titulo" />
+          <span class="card-title">{{ receta.titulo }}</span>
         </div>
         <div class="card-content">
           <h1>
-            {{ recetaToShow.preparacion }}
+            {{ receta.preparacion }}
           </h1>
         </div>
       </div>
