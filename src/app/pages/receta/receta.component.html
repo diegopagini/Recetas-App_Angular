@@ -1,9 +1,27 @@
-<ng-container *ngIf="receta">
-  <div class="row">
-    <div class="col">
-      {{ receta.titulo }}
-      {{ receta.preparacion }}
-      <img [src]="receta.foto" [alt]="receta.titulo" />
+<main>
+  <ng-container *ngIf="receta[0] as receta">
+    <div class="row">
+      <div class="col">
+        <h1 class="center-align">{{ receta.titulo }}</h1>
+
+        <div class="img-container z-depth-1">
+          <img [src]="receta.foto" [alt]="receta.titulo" />
+        </div>
+
+        <div class="ingredientes">
+          <h3>Ingredientes:</h3>
+          <p>{{ receta.ingredientes }}</p>
+        </div>
+
+        <div class="preparacion">
+          <h3>Preparación:</h3>
+          <p>{{ receta.preparacion }}</p>
+        </div>
+      </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!receta[0]">
+    <app-spiner></app-spiner>
+  </ng-container>
+</main>

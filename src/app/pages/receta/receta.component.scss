@@ -1,0 +1,36 @@
+main {
+  min-height: 70vh;
+}
+
+.col {
+  width: 100%;
+
+  .center-align {
+    margin-top: 2rem;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+
+    img {
+      border-radius: 10px;
+      width: 100%;
+    }
+  }
+
+  .ingredientes,
+  .preparacion {
+    width: 100%;
+    margin-top: 2rem;
+
+    h3 {
+      font-weight: bold;
+    }
+  }
+}

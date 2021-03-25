@@ -10,7 +10,7 @@ import { Receta } from '../../interfaces/receta.interface';
   styleUrls: ['./receta.component.scss'],
 })
 export class RecetaComponent implements OnInit {
-  public receta: Receta;
+  receta: Receta;
   public id: string;
   public recetaId: string;
   constructor(
@@ -25,7 +25,6 @@ export class RecetaComponent implements OnInit {
         this.receta = data.filter((element: Receta) => {
           return element.id.includes(this.id);
         });
-        console.log(this.receta);
       });
     });
   }
