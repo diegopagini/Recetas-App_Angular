@@ -6,6 +6,7 @@ import { RecetaModule } from '../../common/receta/receta.module';
 import { MaterialModule } from 'src/app/material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SpinerModule } from 'src/app/common/spiner/spiner.module';
 
 @NgModule({
   declarations: [RecetasComponent],
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SpinerModule,
   ],
   exports: [RecetasComponent],
 })

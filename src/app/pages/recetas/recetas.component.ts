@@ -35,9 +35,10 @@ export class RecetasComponent implements OnInit {
   }
 
   openModal() {
-    document.addEventListener('DOMContentLoaded', function () {
-      const elems = document.querySelectorAll('.modal');
-      const instances = M.Modal.init(elems, {
+    const modalTrigger = document.getElementById('modal-trigger');
+    modalTrigger.addEventListener('click', function () {
+      const modalElem = document.querySelector('.modal');
+      var instance = M.Modal.init(modalElem, {
         dismissible: false,
         opacity: 0.9,
       });

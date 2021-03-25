@@ -5,14 +5,15 @@
 <mat-divider></mat-divider>
 
 <ng-container *ngIf="!(items$ | async)">
-  <div>Spiner</div>
+  <app-spiner></app-spiner>
 </ng-container>
 
 <div class="row title center-align">
   <!-- Modal Trigger -->
   <a
-    class="waves-effect waves-light modal-trigger btn-custom btn-large"
+    class="waves-effect waves-light btn modal-trigger btn-custom btn-large"
     href="#modal1"
+    id="modal-trigger"
     >Carga tu propia receta</a
   >
 </div>
@@ -44,6 +45,7 @@
             type="file"
             id="file"
             #userPhoto
+            title="carga tu foto"
             (change)="onFileSelected($event)"
           />
         </div>
