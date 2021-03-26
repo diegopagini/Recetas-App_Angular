@@ -22,9 +22,10 @@ export class RecetaComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.recetaService.getReceta(params['id']).subscribe((data: any) => {
         this.id = params['id'];
-        this.receta = data.filter((element: Receta) => {
+        this.receta = data.find((element: Receta) => {
           return element.id.includes(this.id);
         });
+        console.log(this.receta);
       });
     });
   }

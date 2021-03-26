@@ -1,5 +1,5 @@
 <main>
-  <ng-container *ngIf="receta[0] as receta">
+  <ng-container *ngIf="receta as receta">
     <div class="row">
       <div class="col">
         <h1 class="center-align">{{ receta.titulo }}</h1>
@@ -21,7 +21,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!receta[0]">
+  <ng-container *ngIf="!receta">
     <app-spiner></app-spiner>
   </ng-container>
 </main>
