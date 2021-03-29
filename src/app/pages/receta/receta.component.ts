@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { RecetasService } from 'src/app/services/recetas.service';
 import { Receta } from '../../interfaces/receta.interface';
@@ -15,7 +16,8 @@ export class RecetaComponent implements OnInit {
   public recetaId: string;
   constructor(
     private route: ActivatedRoute,
-    private recetaService: RecetasService
+    private recetaService: RecetasService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -28,5 +30,9 @@ export class RecetaComponent implements OnInit {
         console.log(this.receta);
       });
     });
+  }
+
+  onReturn() {
+    this.location.back();
   }
 }

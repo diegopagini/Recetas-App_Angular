@@ -5,7 +5,7 @@
         <h1 class="center-align">{{ receta.titulo }}</h1>
 
         <div class="img-container z-depth-1">
-          <img [src]="receta.foto" [alt]="receta.titulo" />
+          <img [src]="receta.foto" [alt]="receta.titulo" loading="lazy" />
         </div>
 
         <div class="ingredientes">
@@ -17,6 +17,13 @@
           <h3>Preparación:</h3>
           <p>{{ receta.preparacion }}</p>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col center-align">
+        <a class="waves-effect waves-light btn btn-custom" (click)="onReturn()"
+          >Regresar</a
+        >
       </div>
     </div>
   </ng-container>

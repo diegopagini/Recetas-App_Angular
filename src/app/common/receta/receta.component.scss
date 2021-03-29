@@ -1,6 +1,10 @@
 .row {
   max-height: 645px;
   overflow-y: auto;
+
+  @media (max-width: 991px) {
+    max-height: 65vh;
+  }
 }
 
 .card {

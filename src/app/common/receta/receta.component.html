@@ -3,7 +3,7 @@
     <div class="col s12 m4" *ngFor="let receta of recetas">
       <div class="card" [routerLink]="['/receta', receta.id]">
         <div class="card-image">
-          <img [src]="receta.foto" [alt]="receta.titulo" />
+          <img [src]="receta.foto" [alt]="receta.titulo" loading="lazy" />
           <span class="card-title">{{ receta.titulo }}</span>
         </div>
         <div class="card-content">
