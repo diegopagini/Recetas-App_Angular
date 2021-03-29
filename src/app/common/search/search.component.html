@@ -5,5 +5,7 @@
     placeholder="Buscá tu receta..."
     type="text"
     autocomplete="off"
+    [formControl]="search"
+    (keyup.enter)="searching()"
   />
 </form>

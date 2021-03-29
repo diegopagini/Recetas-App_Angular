@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
   providedIn: 'root',
 })
 export class RecetasService {
-  private dataCollection: AngularFirestoreCollection<any>;
+  public dataCollection: AngularFirestoreCollection<any>;
 
   constructor(public db: AngularFirestore, public storage: AngularFireStorage) {
     this.dataCollection = this.db.collection<any>('recetas');

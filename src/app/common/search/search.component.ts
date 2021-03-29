@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { RecetasService } from 'src/app/services/recetas.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +9,15 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  form: FormGroup;
+  search = new FormControl();
+  @Output() emiteReceta = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
+
+  searching() {
+    this.emiteReceta.emit(this.search.value);
+    console.log(this.search.value);
+  }
 }

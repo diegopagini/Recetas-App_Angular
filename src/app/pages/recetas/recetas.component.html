@@ -1,5 +1,8 @@
 <div class="container">
-  <app-search></app-search>
+  <app-search
+    (emiteReceta)="valorEmitido = $event"
+    (click)="emiteReceta()"
+  ></app-search>
 </div>
 
 <ng-container *ngIf="items$ | async">

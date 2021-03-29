@@ -19,6 +19,7 @@ export class RecetasComponent implements OnInit {
   items$: Observable<any>;
   downloadURL: Observable<string>;
   fbUrl: string;
+  valorEmitido;
 
   constructor(
     private fb: FormBuilder,
@@ -114,5 +115,9 @@ export class RecetasComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  emiteReceta() {
+    console.log(this.valorEmitido);
   }
 }
