@@ -1,19 +1,22 @@
 <div class="container">
-  <app-search
-    (emiteReceta)="valorEmitido = $event"
-    (click)="emiteReceta()"
-  ></app-search>
+  <app-search (emiteReceta)="recibeEvento($event)"></app-search>
 </div>
 
-<ng-container *ngIf="items$ | async">
-  <app-custom-receta [recetas]="items$ | async"></app-custom-receta>
+<ng-container
+  *ngIf="{
+    value: items$ | async
+  } as receta"
+>
+  <ng-container *ngIf="receta.value; else spinner">
+    <app-custom-receta [recetas]="receta.value"></app-custom-receta>
+  </ng-container>
 </ng-container>
 
 <mat-divider></mat-divider>
 
-<ng-container *ngIf="!(items$ | async)">
+<ng-template #spinner>
   <app-spiner></app-spiner>
-</ng-container>
+</ng-template>
 
 <div class="row title center-align">
   <!-- Modal Trigger -->

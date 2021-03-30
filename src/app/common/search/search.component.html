@@ -1,11 +1,11 @@
 <form formGroup="form" class="form-search">
   <label for="search"></label>
   <input
-    id="search"
+    #txtSearch
     placeholder="Buscá tu receta..."
     type="text"
     autocomplete="off"
     [formControl]="search"
-    (keyup.enter)="searching()"
+    (keyup.enter)="searching(txtSearch.value)"
   />
 </form>

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { filter, finalize, map } from 'rxjs/operators';
+import { Receta } from 'src/app/interfaces/receta.interface';
 import Swal from 'sweetalert2';
 import { RecetasService } from '../../services/recetas.service';
 
@@ -17,15 +19,17 @@ declare var M: any;
 export class RecetasComponent implements OnInit {
   customForm: FormGroup;
   items$: Observable<any>;
+  recetas: any[] = [];
   downloadURL: Observable<string>;
   fbUrl: string;
-  valorEmitido;
+  valorEmitido: string;
 
   constructor(
     private fb: FormBuilder,
     public _recetasService: RecetasService,
     public firestore: AngularFirestore,
-    public storage: AngularFireStorage
+    public storage: AngularFireStorage,
+    public router: Router
   ) {
     this.items$ = firestore.collection('recetas').valueChanges();
   }
@@ -33,6 +37,7 @@ export class RecetasComponent implements OnInit {
   ngOnInit(): void {
     this.openModal();
     this.createForm();
+    this.items$.subscribe((res: Receta[]) => (this.recetas = res));
   }
 
   openModal() {
@@ -117,7 +122,11 @@ export class RecetasComponent implements OnInit {
       .subscribe();
   }
 
-  emiteReceta() {
-    console.log(this.valorEmitido);
+  recibeEvento(valorEmitido) {
+    this.recetas = this.recetas.find((receta: Receta) => {
+      const recetaBuscada = receta.titulo.includes(valorEmitido);
+      return recetaBuscada;
+    });
+    console.log(this.recetas);
   }
 }

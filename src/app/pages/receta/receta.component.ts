@@ -27,7 +27,6 @@ export class RecetaComponent implements OnInit {
         this.receta = data.find((element: Receta) => {
           return element.id.includes(this.id);
         });
-        console.log(this.receta);
       });
     });
   }
