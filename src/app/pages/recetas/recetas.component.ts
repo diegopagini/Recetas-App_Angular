@@ -20,6 +20,7 @@ export class RecetasComponent implements OnInit {
   customForm: FormGroup;
   items$: Observable<any>;
   recetas: any[] = [];
+  recetas2: any[] = [];
   downloadURL: Observable<string>;
   fbUrl: string;
   valorEmitido: string;
@@ -37,7 +38,10 @@ export class RecetasComponent implements OnInit {
   ngOnInit(): void {
     this.openModal();
     this.createForm();
-    this.items$.subscribe((res: Receta[]) => (this.recetas = res));
+    this.items$.subscribe((res: Receta[]) => {
+      this.recetas2 = res;
+      this.recetas = res;
+    });
   }
 
   openModal() {
@@ -128,5 +132,25 @@ export class RecetasComponent implements OnInit {
       return recetaBuscada;
     });
     console.log(this.recetas);
+  }
+
+  buscarReceta(termino: string): Receta[] {
+    let recetaArr: Receta[] = [];
+    termino = termino.toLowerCase();
+    if (termino != '') {
+      for (let i = 0; i < this.recetas.length; i++) {
+        let receta = this.recetas[i];
+        let titulo = receta.titulo.toLowerCase();
+        if (titulo.indexOf(termino) >= 0) {
+          receta.idx = i;
+          recetaArr.push(receta);
+        }
+        console.log(recetaArr);
+      }
+      this.recetas = recetaArr;
+      return this.recetas;
+    } else {
+      return this.recetas2;
+    }
   }
 }

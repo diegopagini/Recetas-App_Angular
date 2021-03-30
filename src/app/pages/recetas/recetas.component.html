@@ -1,5 +1,5 @@
 <div class="container">
-  <app-search (emiteReceta)="recibeEvento($event)"></app-search>
+  <app-search (emiteReceta)="buscarReceta($event)"></app-search>
 </div>
 
 <ng-container
@@ -8,7 +8,7 @@
   } as receta"
 >
   <ng-container *ngIf="receta.value; else spinner">
-    <app-custom-receta [recetas]="receta.value"></app-custom-receta>
+    <app-custom-receta [recetas]="recetas"></app-custom-receta>
   </ng-container>
 </ng-container>
 
