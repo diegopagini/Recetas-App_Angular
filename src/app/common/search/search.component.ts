@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  search = new FormControl(' ');
+  search = new FormControl('');
   @Output() emiteReceta = new EventEmitter<string>();
 
   constructor() {}
@@ -16,10 +16,6 @@ export class SearchComponent implements OnInit {
 
   searching(texto: string) {
     texto = texto.trim();
-
-    if (texto.length === 0) {
-      return;
-    }
     this.emiteReceta.emit(texto);
   }
 }

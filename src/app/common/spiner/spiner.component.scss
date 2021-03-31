@@ -1,3 +1,14 @@
+.spinner-container {
+  min-height: 645px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 991px) {
+    max-height: 65vh;
+  }
+}
+
 #fountainG {
   position: relative;
   width: 234px;

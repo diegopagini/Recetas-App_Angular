@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, finalize, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { Receta } from 'src/app/interfaces/receta.interface';
 import Swal from 'sweetalert2';
 import { RecetasService } from '../../services/recetas.service';
@@ -16,7 +16,7 @@ declare var M: any;
   templateUrl: './recetas.component.html',
   styleUrls: ['./recetas.component.scss'],
 })
-export class RecetasComponent implements OnInit {
+export class RecetasComponent implements OnInit, OnDestroy {
   customForm: FormGroup;
   items$: Observable<any>;
   recetas: any[] = [];
@@ -24,6 +24,7 @@ export class RecetasComponent implements OnInit {
   downloadURL: Observable<string>;
   fbUrl: string;
   valorEmitido: string;
+  private unsubscribe$ = new Subject();
 
   constructor(
     private fb: FormBuilder,
@@ -38,10 +39,7 @@ export class RecetasComponent implements OnInit {
   ngOnInit(): void {
     this.openModal();
     this.createForm();
-    this.items$.subscribe((res: Receta[]) => {
-      this.recetas2 = res;
-      this.recetas = res;
-    });
+    this.getRecetasData();
   }
 
   openModal() {
@@ -137,7 +135,7 @@ export class RecetasComponent implements OnInit {
   buscarReceta(termino: string): Receta[] {
     let recetaArr: Receta[] = [];
     termino = termino.toLowerCase();
-    if (termino != '') {
+    if (termino !== '') {
       for (let i = 0; i < this.recetas.length; i++) {
         let receta = this.recetas[i];
         let titulo = receta.titulo.toLowerCase();
@@ -145,12 +143,27 @@ export class RecetasComponent implements OnInit {
           receta.idx = i;
           recetaArr.push(receta);
         }
-        console.log(recetaArr);
       }
       this.recetas = recetaArr;
       return this.recetas;
     } else {
-      return this.recetas2;
+      this.recetas = this.recetas2;
     }
+    this.getRecetasData();
+  }
+
+  getRecetasData() {
+    this.items$ = this.firestore.collection('recetas').valueChanges();
+    this.items$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res: Receta[]) => {
+        this.recetas2 = res.map((recetas) => recetas);
+        this.recetas = res.map((recetas) => recetas);
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

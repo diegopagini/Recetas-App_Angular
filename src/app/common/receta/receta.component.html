@@ -1,5 +1,5 @@
-<ng-container *ngIf="recetas">
-  <div class="row">
+<div class="row">
+  <ng-container *ngIf="recetas">
     <div class="col s12 m4" *ngFor="let receta of recetas">
       <div class="card" [routerLink]="['/receta', receta.id]">
         <div class="card-image">
@@ -11,5 +11,10 @@
         </div>
       </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
+  <ng-container *ngIf="recetas.length == 0">
+    <div class="empty">
+      <h2>Lo sentimos, la recetas que estas buscando no existe aún...</h2>
+    </div>
+  </ng-container>
+</div>
