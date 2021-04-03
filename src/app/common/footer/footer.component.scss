@@ -1,6 +1,10 @@
 .page-footer {
   background-color: #3f51b5;
 
+  .row {
+    margin-bottom: 0 !important;
+  }
+
   .footer-copyright,
   .footer-title {
     display: flex;
