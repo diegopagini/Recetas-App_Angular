@@ -99,6 +99,7 @@ export class RecetasComponent implements OnInit, OnDestroy {
       this.customForm.value.id = Math.random().toString(36).substring(2);
       this.customForm.value.foto = this.fbUrl;
       this._recetasService.guardarReceta(this.customForm.value);
+      Swal.fire('Guardado', this.customForm.value.titulo, 'success');
       this.onResetetForm;
     }
   }
@@ -129,7 +130,6 @@ export class RecetasComponent implements OnInit, OnDestroy {
       const recetaBuscada = receta.titulo.includes(valorEmitido);
       return recetaBuscada;
     });
-    console.log(this.recetas);
   }
 
   buscarReceta(termino: string): Receta[] {
