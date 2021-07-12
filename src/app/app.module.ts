@@ -11,6 +11,7 @@ import { CustomCommonModule } from './common/custom-common.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RecetasService } from './services/recetas.service';
+import { CargarRecetaModule } from './pages/cargar-receta/cargar-receta.module';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -32,10 +33,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     CustomCommonModule,
     ReactiveFormsModule,
     FormsModule,
+    CargarRecetaModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [RecetasService],
   bootstrap: [AppComponent],

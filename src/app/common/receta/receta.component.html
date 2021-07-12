@@ -4,10 +4,9 @@
       <div class="card" [routerLink]="['/receta', receta.id]">
         <div class="card-image">
           <img [src]="receta.foto" [alt]="receta.titulo" loading="lazy" />
-          <span class="card-title">{{ receta.titulo }}</span>
         </div>
         <div class="card-content">
-          <p>{{ receta.preparacion | slice: 0:100 }}...</p>
+          <h2>{{ receta.titulo }}</h2>
         </div>
       </div>
     </div>

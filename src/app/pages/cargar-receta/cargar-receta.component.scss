@@ -1,0 +1,39 @@
+.form-container {
+  padding: 3rem;
+  min-height: 80vh;
+}
+
+@media screen and (max-width: 991px) {
+  .form-container {
+    padding: 1rem;
+  }
+}
+
+.title {
+  margin: 5rem 0;
+}
+.btn-custom {
+  background-color: #3f51b5;
+}
+.modal-close {
+  margin-right: 10px !important;
+}
+
+input:focus {
+  border-bottom: 1px solid #3f51b5 !important;
+}
+
+label {
+  color: #3f51b5 !important;
+}
+
+.error {
+  color: red !important;
+}
+
+.text-area {
+  width: 100%;
+  min-height: 150px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
